@@ -97,28 +97,204 @@ LEFT JOIN product_summary p
 - Orders vs revenue
 - Average order value
 
+```sql
+-- Quarterly Revenue Trend
+SELECT 
+    year,
+    month,
+    SUM(revenue_usd) AS total_revenue
+FROM monthly_revenue
+GROUP BY year, month
+ORDER BY year, month;
+
+-- Orders vs Revenue
+SELECT 
+    year,
+    month,
+    COUNT(order_id) AS total_orders,
+    SUM(total_amount_usd) AS total_revenue
+FROM orders
+GROUP BY year, month
+ORDER BY year, month;
+
+-- Average Order Value (AOV)
+SELECT 
+    SUM(total_amount_usd) / COUNT(order_id) AS avg_order_value
+FROM orders;
+```
+
 ### 2. Customer Analysis
 - Revenue-based customer segmentation
 - Churn by membership tier
 - Repeat vs non-repeat customers
 - Engagement level vs spend
 
+```sql
+-- Customer Segmentation (Revenue-Based)
+SELECT 
+    customer_id,
+    total_spend_usd,
+    CASE 
+        WHEN total_spend_usd >= (
+            SELECT PERCENTILE_CONT(0.8) WITHIN GROUP (ORDER BY total_spend_usd)
+            FROM customers
+        ) THEN 'High Value'
+        WHEN total_spend_usd >= (
+            SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY total_spend_usd)
+            FROM customers
+        ) THEN 'Medium Value'
+        ELSE 'Low Value'
+    END AS customer_segment
+FROM customers;
+
+
+-- Churn Analysis
+SELECT 
+    membership_tier,
+    COUNT(*) AS total_customers,
+    SUM(CASE WHEN churned = B'1' THEN 1 ELSE 0 END) AS churned_customers,
+    AVG(CASE WHEN churned = B'1' THEN 1.0 ELSE 0 END) AS churn_rate
+FROM customers
+GROUP BY membership_tier;
+
+
+-- Repeat vs New Customeers
+SELECT 
+    is_repeat_customer,
+    COUNT(order_id) AS orders,
+    SUM(total_amount_usd) AS revenue
+FROM orders
+GROUP BY is_repeat_customer;
+
+
+-- Customer Behavior → Revenue
+SELECT 
+    CASE 
+        WHEN session_duration_minutes < 5 THEN 'Low Engagement'
+        WHEN session_duration_minutes < 15 THEN 'Medium Engagement'
+        ELSE 'High Engagement'
+    END AS engagement_level,
+    COUNT(order_id) AS orders,
+    AVG(total_amount_usd) AS avg_spend
+FROM orders
+GROUP BY engagement_level;
+
+```
 ### 3. Product & Revenue Drivers
 - Top products
 - Category performance
 - Discount impact
 - Returns impact
 
+```sql
+ --Top Products
+SELECT
+    product_name,
+    SUM(total_amount_usd) AS revenue,
+    COUNT(order_id) AS orders
+FROM orders
+GROUP BY product_name
+ORDER BY revenue DESC
+LIMIT 10;
+
+-- Category Performance
+SELECT 
+    category,
+    SUM(total_amount_usd) AS revenue,
+    COUNT(order_id) AS orders
+FROM orders
+GROUP BY category
+ORDER BY revenue DESC;
+
+-- Discount Impact
+SELECT 
+    CASE 
+        WHEN discount_pct = 0 THEN 'No Discount'
+        WHEN discount_pct < 20 THEN 'Low Discount'
+        ELSE 'High Discount'
+    END AS discount_group,
+    COUNT(order_id) AS orders,
+    AVG(total_amount_usd) AS avg_revenue
+FROM orders
+GROUP BY discount_group;
+
+-- Returns Impact
+SELECT 
+    category,
+    COUNT(*) AS total_orders,
+    SUM(CASE WHEN returned = B'1' THEN 1 ELSE 0 END) AS returns,
+    AVG(CASE WHEN returned = B'1' THEN 1.0 ELSE 0 END) AS return_rate
+FROM orders
+GROUP BY category
+ORDER BY return_rate DESC;
+
+```
+
 ### 4. Operations & Experience
 - Delivery days vs rating
 - Rating vs repeat behavior
 - Payment method performance
 
+```sql
+
+-- Delivery vs Rating
+SELECT 
+    delivery_days,
+    AVG(customer_rating) AS avg_rating
+FROM orders
+GROUP BY delivery_days
+ORDER BY delivery_days;
+
+-- Rating vs Repeat Behavior
+SELECT 
+    customer_rating,
+    ROUND(
+        AVG(CASE WHEN is_repeat_customer = B'1' THEN 1.0 ELSE 0 END),
+        3
+    ) AS repeat_rate
+FROM orders
+GROUP BY customer_rating
+ORDER BY customer_rating;
+
+-- Payment Method Performance
+SELECT 
+    payment_method,
+    COUNT(order_id) AS orders,
+    AVG(total_amount_usd) AS avg_revenue
+FROM orders
+GROUP BY payment_method;
+
+```
 ### 5. Advanced Analysis
 - RFM-style customer profiling
 - Customer lifetime value estimation
 - Revenue concentration / Pareto analysis
 
+```sql
+ -- RFM Segmentation
+SELECT 
+    customer_id,
+    days_since_last_purchase AS recency,
+    total_orders AS frequency,
+    total_spend_usd AS monetary
+FROM customers;
+
+-- CLV Calculation
+SELECT 
+    customer_id,
+    avg_order_value_usd * total_orders AS estimated_clv
+FROM customers
+ORDER BY estimated_clv DESC;
+
+-- Revenue Concentration (Pareto)
+SELECT 
+    customer_id,
+    SUM(total_amount_usd) AS revenue
+FROM orders
+GROUP BY customer_id
+ORDER BY revenue DESC;
+
+```
 ---
 
 ## Key Findings
