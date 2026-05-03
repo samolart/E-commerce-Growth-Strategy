@@ -18,7 +18,6 @@ The analysis shows that revenue is concentrated in a relatively small group of h
 - Exploratory Data Analysis
 - Key Findings
 - Recommendations
-- Dashboard Preview
 
 ---
 
@@ -323,29 +322,9 @@ ORDER BY revenue DESC;
 
 ---
 
-## Dashboard Preview
-![Dashboard Preview](./Dashboard.png)
-
----
-
 ## Project Files
 - SQL analysis
 - Dashboard
 - PowerPoint summary
 - Final synthesis slide
 
----
-
-## Dashboard Storyline
-The dashboard and presentation were designed to support the following storyline:
-
-1. Revenue is growing, but not evenly
-2. A small group of customers drives most revenue
-3. Repeat customers are disproportionately valuable
-4. Discounts and returns reduce profitability
-5. Growth can improve through retention, pricing efficiency, and customer targeting 
-
----
-
-## Conclusion
-This project translates raw customer and sales data into a consulting-style growth strategy that can support better decision-making across marketing, retention, pricing, and product performance. 
