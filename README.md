@@ -1,5 +1,8 @@
 # E-commerce Growth Strategy: Revenue & Customer Lifetime Value Optimization
 
+<img width="1280" height="720" alt="Dashboard" src="https://github.com/user-attachments/assets/4975e2f3-20c7-4bf2-ab54-7c42bd9d0f19" />
+
+
 ## Summary
 This project analyzes e-commerce customer behavior, sales performance, product mix, discounts, churn, and engagement patterns to identify the main drivers of revenue growth and customer lifetime value.
 
@@ -25,6 +28,7 @@ The objective of this project is to analyze e-commerce sales and customer behavi
 **How can the business increase revenue and customer lifetime value?**
 
 To answer this, the project examines customer segmentation, repeat purchase behavior, churn, product performance, discount impact, and operational experience. 
+
 
 ---
 
