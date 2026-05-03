@@ -4,10 +4,22 @@
 
 
 ## Summary
-This project analyzes e-commerce customer behavior, sales performance, product mix, discounts, churn, and engagement patterns to identify the main drivers of revenue growth and customer lifetime value.
+This project analyzes e-commerce customer behavior and sales performance to identify the key drivers of revenue growth and customer lifetime value (CLV).
 
-The analysis shows that revenue is concentrated in a relatively small group of high-value and repeat customers, while category performance, discounting, and customer experience all influence profitability and retention. The final dashboard and presentation were built to support a consulting-style growth strategy focused on retention, pricing efficiency, and customer value. 
+The analysis reveals that revenue generation is highly concentrated among a relatively small segment of customers, with repeat customers contributing approximately 65% of total revenue. Customer engagement, measured through session duration and interaction behavior, is strongly correlated with higher spending, while excessive discounting and product returns negatively impact profitability.
 
+At the product level, performance varies significantly across categories, with certain segments driving a disproportionate share of revenue. At the same time, operational factors such as delivery experience and customer ratings influence repeat purchase behavior, highlighting the importance of end-to-end customer experience in sustaining growth.
+
+From a strategic perspective, the business faces a classic growth challenge: balancing customer acquisition with retention while protecting margins. The findings suggest that current revenue growth is not fully optimized due to inefficiencies in pricing strategy, uneven customer value distribution, and retention gaps across membership tiers.
+
+To address these challenges, this project recommends a targeted growth strategy focused on:
+
+Increasing retention of high-value and repeat customers
+Optimizing discount strategies to protect margins
+Improving customer engagement to drive higher spending
+Enhancing operational consistency to support repeat purchases
+
+By shifting focus from broad acquisition and discounting toward customer value optimization and retention, the business can unlock sustainable revenue growth and improve long-term profitability.
 ---
 
 ## Table of Contents
