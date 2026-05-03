@@ -58,9 +58,7 @@ To answer this, the project examines customer segmentation, repeat purchase beha
 ## Tools
 - SQL (PostgreSQL)
 - Excel
-- PowerPoint
-
-The workflow is similar in style to your previous portfolio projects, which also used Excel for cleaning, PostgreSQL for analysis, and Tableau for reporting. :contentReference[oaicite:4]{index=4}
+- [PowerPoint](https://github.com/samolart/E-commerce-Growth-Strategy/blob/main/ecommerce-growth-synthesis-slide.pdf)
 
 ---
 
