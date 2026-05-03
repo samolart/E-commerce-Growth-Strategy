@@ -322,9 +322,5 @@ ORDER BY revenue DESC;
 
 ---
 
-## Project Files
-- SQL analysis
-- Dashboard
-- PowerPoint summary
-- Final synthesis slide
+
 
