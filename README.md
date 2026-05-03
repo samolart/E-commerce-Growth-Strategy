@@ -50,13 +50,43 @@ The workflow is similar in style to your previous portfolio projects, which also
 ---
 
 ## Data Preparation
-The analysis started by building a master dataset through joins across the four tables.
+A master dataset was created by joining all tables:
 
-### Master table logic
-- `customers.customer_id = orders.customer_id`
-- `orders.product_name = product_summary.product_name`
+```sql
+SELECT 
+    c.customer_id,
+    c.country,
+    c.age,
+    c.gender,
+    c.membership_tier,
+    c.total_orders,
+    c.total_spend_usd,
+    c.avg_order_value_usd,
+    c.days_since_last_purchase,
+    c.churned,
+    o.order_id,
+    o.order_date,
+    o.category,
+    o.product_name,
+    o.total_amount_usd,
+    o.quantity,
+    o.discount_pct,
+    o.discount_amount_usd,
+    o.delivery_days,
+    o.customer_rating,
+    o.session_duration_minutes,
+    o.pages_viewed_before_purchase,
+    o.is_repeat_customer,
+    p.total_revenue_usd AS product_revenue,
+    p.avg_discount_pct AS product_discount,
+    p.return_rate AS product_return_rate
+FROM customers c
+LEFT JOIN orders o 
+    ON c.customer_id = o.customer_id
+LEFT JOIN product_summary p
+    ON o.product_name = p.product_name;
 
-This allowed customer-level, order-level, and product-level analysis in one workflow.
+```
 
 ---
 
